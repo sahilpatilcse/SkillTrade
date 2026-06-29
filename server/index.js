@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: true,
+    origin: "https://skill-trade-two.vercel.app",
     credentials: true,
   }),
 );
