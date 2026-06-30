@@ -81,7 +81,7 @@ SkillTrade/
 
 ### Clone Repository
 
-git clone <repository-url>
+git clone https://github.com/sahilpatilcse/SkillTrade.git
 
 cd SkillTrade
 
