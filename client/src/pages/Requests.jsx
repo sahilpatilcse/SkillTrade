@@ -7,6 +7,7 @@ export default function Requests() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
   const [updatingId, setUpdatingId] = useState(null);
   const [filter, setFilter] = useState("All");
 
@@ -19,8 +20,8 @@ export default function Requests() {
       .then((res) => {
         setRequests(res.data.myRecRequests);
       })
-      .catch(() => {
-        setError("Failed to load requests.");
+      .catch((err) => {
+        setError(err.response?.data?.message || "Failed to load requests.");
       })
       .finally(() => {
         setLoading(false);
@@ -50,8 +51,8 @@ export default function Requests() {
           setSuccessMsg("");
         }, 3000);
       })
-      .catch(() => {
-        setError("Failed to update request.");
+      .catch((err) => {
+        setError(err.response?.data?.message || "Failed to update request.");
       })
       .finally(() => {
         setUpdatingId(null);
@@ -61,7 +62,6 @@ export default function Requests() {
   const statusColor = (status) => {
     if (status === "Accepted") return "bg-green-100 text-green-700";
     if (status === "Rejected") return "bg-red-100 text-red-700";
-
     return "bg-yellow-100 text-yellow-700";
   };
 
@@ -73,7 +73,6 @@ export default function Requests() {
   const typeColor = (type) => {
     if (type === "Learn") return "bg-purple-100 text-purple-700";
     if (type === "Teach") return "bg-blue-100 text-blue-700";
-
     return "bg-gray-100 text-gray-700";
   };
 
@@ -122,7 +121,7 @@ export default function Requests() {
 
         {filteredRequests.length === 0 ? (
           <div className="bg-white p-8 rounded-xl shadow-md text-center">
-            <p className="text-gray-500">No incoming requests yet.</p>
+            <p className="text-gray-500">No requests found.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-5">

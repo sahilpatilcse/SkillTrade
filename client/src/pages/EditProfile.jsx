@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API from "../api/axios.js";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function EditProfile() {
   const [formData, setFormData] = useState({
@@ -15,17 +15,16 @@ export default function EditProfile() {
 
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-
+  
   const { token } = useAuth();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     API.get("/api/auth/me", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
         const user = res.data.user;
-
         setFormData({
           bio: user.bio || "",
           skillsOffered: user.skillsOffered.join(", "),
@@ -33,8 +32,7 @@ export default function EditProfile() {
         });
       })
       .catch((err) => {
-        console.log(err);
-        setError("Failed to load profile.");
+        setError(err.response?.data?.message || "Failed to load profile.");
       })
       .finally(() => {
         setLoading(false);
@@ -73,14 +71,13 @@ export default function EditProfile() {
     })
       .then(() => {
         setSuccessMsg("Profile updated successfully!");
-
         setTimeout(() => {
+          setSuccessMsg("");
           navigate("/dashboard");
         }, 1000);
       })
       .catch((err) => {
-        console.log(err);
-        setError("Failed to update profile.");
+        setError(err.response?.data?.message || "Failed to update profile.");
       })
       .finally(() => {
         setSaving(false);
@@ -116,7 +113,7 @@ export default function EditProfile() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
-            <label  className="block font-medium mb-2 text-gray-700">Bio</label>
+            <label className="block font-medium mb-2 text-gray-700">Bio</label>
 
             <textarea
               className="w-full border rounded-lg px-4 py-3 border-gray-300 focus:outline-none focus:border-purple-500"

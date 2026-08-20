@@ -60,7 +60,7 @@ export default function SignUp() {
     e.preventDefault();
 
     const validationErrors = validate();
-
+    
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;

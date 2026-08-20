@@ -8,9 +8,7 @@ exports.sendRequest = async (req, res) => {
 
     // Prevent sending request to yourself
     if (senderId === receiverId) {
-      return res.status(400).json({
-        message: "You cannot send a request to yourself",
-      });
+      return res.status(400).json({message: "You cannot send a request to yourself"});
     }
 
     // Prevent duplicate pending requests
@@ -21,9 +19,7 @@ exports.sendRequest = async (req, res) => {
     });
 
     if (existingRequest) {
-      return res.status(400).json({
-        message: "Request already sent",
-      });
+      return res.status(400).json({message: "Request already sent"});
     }
 
     const newTradeReq = await TradeRequest.create({
@@ -43,7 +39,7 @@ exports.sendRequest = async (req, res) => {
 exports.getMyRequests = async (req, res) => {
   try {
     const myRecRequests = await TradeRequest.find({
-      receiver: req.user.id,
+      receiver: req.user.id
     })
       .populate("sender", "-password")
       .sort({ createdAt: -1 });

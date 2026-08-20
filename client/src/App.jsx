@@ -8,8 +8,8 @@ import Requests from "./pages/Requests";
 import SentRequests from "./pages/SentRequests";
 import SignUp from "./pages/SignUp";
 import Navbar from "./components/Navbar";
-import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (

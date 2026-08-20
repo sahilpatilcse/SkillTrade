@@ -64,19 +64,17 @@ export default function Login() {
     API.post("/api/auth/login", loginData)
       .then((res) => {
         login(res.data.user, res.data.token);
-        navigate("/dashboard");
+        navigate(location.state?.from || "/dashboard");
       })
       .catch((err) => {
-        setServerError(
-          err.response?.data?.message || "Invalid email or password",
-        );
+        setServerError(err.response?.data?.message || "Invalid email or password");
       });
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+        <h1 className="text-center text-3xl font-bold text-gray-800 mb-2">
           Welcome Back
         </h1>
 
@@ -141,7 +139,7 @@ export default function Login() {
           Don't have an account?{" "}
           <Link
             to="/signup"
-            className="text-purple-700 font-semibold hover:underline"
+            className="text-purple-700 font-semibold hover:underline transition"
           >
             Sign Up
           </Link>

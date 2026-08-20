@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import HomeComponent from "../components/homeComponent";
 
 export default function Home() {
   const { user } = useAuth();
@@ -48,40 +49,28 @@ export default function Home() {
         <h2 className="text-3xl text-gray-800 mb-12 text-center">
           How SkillTrade Works
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-xl hover:scale-105 transition">
-            <div className="text-4xl mb-4">👤</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              Create Profile
-            </h3>
-            <p className="text-gray-600">
-              List the skills you can teach and the skills you want to learn.
-            </p>
-          </div>
+          <HomeComponent
+            icon="👤"
+            heading="Create Profile"
+            text="List the skills you can teach and the skills you want to learn."
+          />
 
-          <div className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-xl hover:scale-105 transition">
-            <div className="text-4xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              Browse Users
-            </h3>
-            <p className="text-gray-600">
-              Find people whose skills match what you are looking for.
-            </p>
-          </div>
+          <HomeComponent
+            icon="🔍"
+            heading="Browse Users"
+            text="Find people whose skills match what you are looking for."
+          />
 
-          <div className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-xl hover:scale-105 transition">
-            <div className="text-4xl mb-4">🤝</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              Start Trading
-            </h3>
-            <p className="text-gray-600">
-              Send a trade request and start learning from each other.
-            </p>
-          </div>
+          <HomeComponent
+            icon="🤝"
+            heading="Start Trading"
+            text="Send a trade request and start learning from each other."
+          />
         </div>
       </div>
 
-      {/* CTA sec. */}
       <div className="bg-purple-700 text-white py-16 px-8 text-center">
         <h2 className="text-3xl font-bold mb-4">
           Ready to start trading skills?

@@ -18,8 +18,7 @@ export default function SentRequests() {
         setSentRequests(res.data.mySentRequests);
       })
       .catch((err) => {
-        console.log(err);
-        setError("Failed to load sent requests.");
+        setError(err.response?.data?.meassage || "Failed to load sent requests.");
       })
       .finally(() => {
         setLoading(false);
@@ -29,7 +28,6 @@ export default function SentRequests() {
   const statusColor = (status) => {
     if (status === "Accepted") return "bg-green-100 text-green-700";
     if (status === "Rejected") return "bg-red-100 text-red-700";
-
     return "bg-yellow-100 text-yellow-700";
   };
 
@@ -41,7 +39,6 @@ export default function SentRequests() {
   const typeColor = (type) => {
     if (type === "Learn") return "bg-purple-100 text-purple-700";
     if (type === "Teach") return "bg-blue-100 text-blue-700";
-
     return "bg-gray-100 text-gray-700";
   };
 
@@ -82,7 +79,7 @@ export default function SentRequests() {
 
         {filteredRequests.length === 0 ? (
           <div className="bg-white p-10 rounded-xl shadow-md text-center">
-            <p className="text-gray-500">You haven't sent any requests yet.</p>
+            <p className="text-gray-500">No requests found.</p>
           </div>
         ) : (
           <div className="flex flex-col gap-5">

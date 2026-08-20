@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
+
   const { token } = useAuth();
 
   useEffect(() => {
@@ -12,7 +13,7 @@ export default function Dashboard() {
       try {
         const res = await API.get("/api/auth/me", {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`, 
           },
         });
         setUser(res.data.user);
@@ -37,6 +38,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-8">
       <div className="max-w-2xl mx-auto bg-white p-10 shadow-md rounded-xl">
+        
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-800">My Profile</h1>
           <Link
@@ -56,7 +58,7 @@ export default function Dashboard() {
           <p className="text-sm text-gray-500 mb-1">Email</p>
           <p className="text-lg text-gray-800 font-medium">{user.email}</p>
         </div>
-
+ 
         <div className="mb-6">
           <p className="text-sm text-gray-500 mb-1">Bio</p>
           <p className="text-lg text-gray-800">
